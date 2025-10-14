@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Integra Gestor Aventura</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="branding">
+        <img src="./assets/logo.svg" alt="Integra Gestor Aventura" class="logo" />
+        <div>
+          <h1>Integra Gestor Aventura</h1>
+          <p>Dashboard modular para gestão de atividades de aventura</p>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <button class="nav-btn" data-target="novo-roteiro">Novo roteiro</button>
+        <button class="nav-btn" data-target="dashboard">Dashboard</button>
+        <button class="nav-btn" data-target="agendamentos">Agendamentos</button>
+        <button class="nav-btn" data-target="relatorios">Relatórios</button>
+        <button class="nav-btn" data-target="configuracoes">Configurações</button>
+      </nav>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar" aria-label="Atalhos">
+        <h2>Atalhos</h2>
+        <ul class="shortcut-list">
+          <li><button data-target="novo-roteiro" class="link-btn">Novo roteiro</button></li>
+          <li><button data-target="dashboard" class="link-btn">Visão geral</button></li>
+          <li><button data-target="agendamentos" class="link-btn">Criar agenda</button></li>
+          <li><button data-target="relatorios" class="link-btn">Exportar dados</button></li>
+          <li><button data-target="configuracoes" class="link-btn">Equipe</button></li>
+        </ul>
+      </aside>
+
+      <section id="novo-roteiro" class="panel panel--novo is-active" aria-labelledby="tab-novo-roteiro">
+        <div class="novo-roteiro">
+          <aside class="novo-roteiro__sidebar" aria-label="Menu Novo Roteiro">
+            <div class="novo-roteiro__brand">
+              <span class="novo-roteiro__brand-title">Terra Trekking</span>
+              <button class="novo-roteiro__manager" type="button">Gerente de Roteiros</button>
+            </div>
+            <nav class="novo-roteiro__menu" aria-label="Ações">
+              <div class="novo-roteiro__menu-group">
+                <button class="novo-roteiro__menu-item is-active" data-mode="novo">Novo Roteiro</button>
+                <button class="novo-roteiro__menu-item" data-mode="editar" disabled>Editar Roteiro</button>
+                <button class="novo-roteiro__menu-item" data-mode="excluir" disabled>Excluir / Cancelar</button>
+              </div>
+              <div class="novo-roteiro__menu-divider" role="separator"></div>
+              <div class="novo-roteiro__menu-group">
+                <button class="novo-roteiro__menu-item" data-mode="ativos" disabled>Roteiros Ativos</button>
+                <button class="novo-roteiro__menu-item" data-mode="config" disabled>Configurações</button>
+                <button class="novo-roteiro__menu-item" data-mode="conta" disabled>Minha Conta</button>
+                <button class="novo-roteiro__menu-item" data-mode="suporte" disabled>Suporte</button>
+              </div>
+            </nav>
+          </aside>
+          <div class="novo-roteiro__workspace" id="novoRoteiroWorkspace">
+            <header class="novo-roteiro__header">
+              <h2 id="tab-novo-roteiro">Gestão de Aventura</h2>
+              <button class="novo-roteiro__toggle" type="button" aria-label="Abrir menu">☰</button>
+            </header>
+
+            <section class="novo-roteiro__form" aria-label="Formulário de roteiro">
+              <div class="novo-roteiro__form-header">
+                <div class="novo-roteiro__form-id">
+                  <h3 class="novo-roteiro__form-title" id="novoRoteiroMode">Novo Roteiro</h3>
+                  <label class="novo-roteiro__field">
+                    <span>Nome do roteiro</span>
+                    <input type="text" id="novoRoteiroNome" placeholder="Ex.: Trilha do Sol — Semana Santa" />
+                  </label>
+                </div>
+                <div class="novo-roteiro__form-clone">
+                  <label class="novo-roteiro__field">
+                    <span>Clonar de...</span>
+                    <select id="novoRoteiroClone">
+                      <option value="">Selecione um roteiro</option>
+                      <option>Trilha do Sol — 2025</option>
+                      <option>Caminhada das Águas — 2025</option>
+                      <option>Expedição Serra Alta — 2024</option>
+                    </select>
+                  </label>
+                  <fieldset class="novo-roteiro__clone-options">
+                    <legend>Extrair</legend>
+                    <label><input type="checkbox" value="nome" class="novo-roteiro__clone-opt" checked /> Nome</label>
+                    <label><input type="checkbox" value="atributos" class="novo-roteiro__clone-opt" checked /> Atributos</label>
+                    <label><input type="checkbox" value="logistica" class="novo-roteiro__clone-opt" checked /> Logística</label>
+                    <label><input type="checkbox" value="servicos" class="novo-roteiro__clone-opt" checked /> Serviços</label>
+                    <label><input type="checkbox" value="tudo" class="novo-roteiro__clone-opt" /> Tudo</label>
+                  </fieldset>
+                  <button type="button" id="novoRoteiroCloneApply" class="primary">Aplicar</button>
+                </div>
+              </div>
+
+              <div class="novo-roteiro__tabs" role="tablist">
+                <button class="novo-roteiro__tab is-active" type="button" data-tab="especificacoes">Especificações</button>
+                <button class="novo-roteiro__tab" type="button" data-tab="data">Data</button>
+                <button class="novo-roteiro__tab" type="button" data-tab="embarque">Embarque</button>
+                <button class="novo-roteiro__tab" type="button" data-tab="servicos">Serviços</button>
+                <button class="novo-roteiro__tab" type="button" data-tab="atrativos">Atrativos</button>
+                <button class="novo-roteiro__tab" type="button" data-tab="hospedagem">Hospedagem</button>
+                <button class="novo-roteiro__tab" type="button" data-tab="aluguel">Aluguel</button>
+                <button class="novo-roteiro__tab" type="button" data-tab="informacoes">Informações</button>
+              </div>
+
+              <div class="novo-roteiro__panels">
+                <section id="tab-especificacoes" class="novo-roteiro__panel is-active" role="tabpanel">
+                  <header>
+                    <h3>Especificações</h3>
+                  </header>
+                  <div class="novo-roteiro__grid">
+                    <label class="novo-roteiro__field">
+                      <span>Tipo de evento</span>
+                      <select id="tipoEvento">
+                        <option>Travessia</option>
+                        <option>Circuito</option>
+                        <option>Expedição base fixa</option>
+                        <option>Roteiro temático</option>
+                        <option>Outro</option>
+                      </select>
+                    </label>
+                    <div class="novo-roteiro__field">
+                      <span>Percurso total (km)</span>
+                      <div class="novo-roteiro__inline">
+                        <input type="number" id="percursoKm" min="0" placeholder="km" />
+                        <button type="button" id="togglePercursoDetalhe" class="secondary">Detalhar</button>
+                      </div>
+                      <textarea id="percursoDetalhe" class="is-hidden" rows="3" placeholder="Detalhamento do percurso"></textarea>
+                    </div>
+                    <label class="novo-roteiro__field">
+                      <span>Localidade principal</span>
+                      <input type="text" id="localidadeBase" placeholder="Ex.: Serra do Cipó" />
+                    </label>
+                    <div class="novo-roteiro__field" id="localidadeExtras" data-max="6"></div>
+                    <button type="button" class="secondary" id="addLocalidade">+ Adicionar localidade</button>
+                    <div class="novo-roteiro__field">
+                      <span>Abrangência</span>
+                      <div class="novo-roteiro__inline novo-roteiro__inline--wrap">
+                        <label><input type="radio" name="abrangencia" value="brasil" checked /> Brasil</label>
+                        <label><input type="radio" name="abrangencia" value="exterior" /> Exterior</label>
+                      </div>
+                      <select id="abrangenciaUf">
+                        <option>AC</option><option>AL</option><option>AM</option><option>AP</option>
+                        <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                        <option>GO</option><option>MA</option><option>MG</option><option>MS</option>
+                        <option>MT</option><option>PA</option><option>PB</option><option>PE</option>
+                        <option>PI</option><option>PR</option><option>RJ</option><option>RN</option>
+                        <option>RO</option><option>RR</option><option>RS</option><option>SC</option>
+                        <option>SE</option><option>SP</option><option>TO</option>
+                      </select>
+                      <input type="text" id="abrangenciaPais" class="is-hidden" placeholder="Digite o país" />
+                    </div>
+                  </div>
+                </section>
+
+                <section id="tab-data" class="novo-roteiro__panel" role="tabpanel">
+                  <header>
+                    <h3>Data</h3>
+                  </header>
+                  <div class="novo-roteiro__grid">
+                    <label class="novo-roteiro__field">
+                      <span>Data inicial</span>
+                      <input type="datetime-local" id="dataInicial" />
+                    </label>
+                    <label class="novo-roteiro__field">
+                      <span>Evento prolongado</span>
+                      <input type="checkbox" id="eventoProlongado" />
+                    </label>
+                    <label class="novo-roteiro__field is-hidden" id="campoDataFinal">
+                      <span>Data final</span>
+                      <input type="datetime-local" id="dataFinal" />
+                    </label>
+                    <div class="novo-roteiro__field">
+                      <span>Destacar no calendário</span>
+                      <div class="novo-roteiro__inline novo-roteiro__inline--wrap">
+                        <label><input type="checkbox" value="feriados" checked /> Feriados</label>
+                        <label><input type="checkbox" value="pontos" /> Pontos facultativos</label>
+                        <label><input type="checkbox" value="civico" /> Datas cívico-religiosas</label>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="tab-embarque" class="novo-roteiro__panel" role="tabpanel">
+                  <header>
+                    <h3>Embarque</h3>
+                  </header>
+                  <div class="novo-roteiro__grid">
+                    <div class="novo-roteiro__field">
+                      <span>Embarque inicial</span>
+                      <div class="novo-roteiro__inline">
+                        <input type="date" id="embarqueDataIni" />
+                        <input type="time" id="embarqueHoraIni" />
+                      </div>
+                    </div>
+                    <div class="novo-roteiro__field">
+                      <span>Desembarque final</span>
+                      <div class="novo-roteiro__inline">
+                        <input type="date" id="embarqueDataFim" />
+                        <input type="time" id="embarqueHoraFim" />
+                      </div>
+                    </div>
+                    <label class="novo-roteiro__field">
+                      <span>Ponto de embarque</span>
+                      <select id="pontoEmbarque">
+                        <option value="">Selecione um ponto</option>
+                        <option value="1">Terminal Central</option>
+                        <option value="2">Praça das Águas</option>
+                      </select>
+                    </label>
+                    <div class="novo-roteiro__field">
+                      <span>Volta em sentido inverso?</span>
+                      <input type="checkbox" id="voltaInversa" checked />
+                    </div>
+                    <label class="novo-roteiro__field">
+                      <span>Observações</span>
+                      <textarea id="embarqueObs" rows="4" placeholder="Digite observações adicionais..."></textarea>
+                    </label>
+                  </div>
+                </section>
+
+                <section id="tab-servicos" class="novo-roteiro__panel" role="tabpanel">
+                  <header>
+                    <h3>Serviços Inclusos</h3>
+                  </header>
+                  <div class="novo-roteiro__servicos">
+                    <div class="novo-roteiro__servicos-config">
+                      <label>
+                        <span>Pax mínimo</span>
+                        <input type="number" id="servicoPaxMinimo" min="1" value="1" />
+                      </label>
+                      <div>
+                        <span>Preço sugerido (pessoa)</span>
+                        <strong id="servicoPrecoSugerido">R$ 0,00</strong>
+                      </div>
+                      <label>
+                        <span>Preço final (pessoa)</span>
+                        <input type="text" id="servicoPrecoFinal" placeholder="R$ 0,00" />
+                      </label>
+                    </div>
+                    <div id="servicosContainer" class="novo-roteiro__servicos-list"></div>
+                    <div class="novo-roteiro__servicos-actions">
+                      <button type="button" class="secondary" id="addItemServico">+ Adicionar item</button>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="tab-atrativos" class="novo-roteiro__panel" role="tabpanel">
+                  <header>
+                    <h3>Atrativos</h3>
+                  </header>
+                  <div class="novo-roteiro__atrativos">
+                    <div id="atrativosContainer"></div>
+                    <div class="novo-roteiro__atrativos-actions">
+                      <button type="button" class="secondary" id="addAtrativo">+ Adicionar atrativo</button>
+                    </div>
+                    <div class="novo-roteiro__field">
+                      <label class="novo-roteiro__inline novo-roteiro__inline--between">
+                        <span>Observações</span>
+                        <input type="checkbox" id="atrObsToggle" />
+                      </label>
+                      <textarea id="atrObsText" class="is-hidden" rows="4" placeholder="Observações gerais (opcional)"></textarea>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="tab-hospedagem" class="novo-roteiro__panel" role="tabpanel">
+                  <header>
+                    <h3>Hospedagem</h3>
+                  </header>
+                  <div class="novo-roteiro__hospedagem">
+                    <div id="hospedagensContainer"></div>
+                    <div class="novo-roteiro__hospedagem-actions">
+                      <button type="button" class="secondary" id="addHospedagem">+ Adicionar hospitalidade</button>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="tab-aluguel" class="novo-roteiro__panel" role="tabpanel">
+                  <header>
+                    <h3>Aluguel de equipamentos</h3>
+                  </header>
+                  <div class="novo-roteiro__aluguel">
+                    <div id="aluguelContainer"></div>
+                    <div class="novo-roteiro__aluguel-actions">
+                      <button type="button" class="secondary" id="addItemAluguel">+ Adicionar item</button>
+                    </div>
+                    <label class="novo-roteiro__field">
+                      <span>Observações</span>
+                      <textarea id="aluguelObs" rows="4" placeholder="Observações adicionais"></textarea>
+                    </label>
+                  </div>
+                </section>
+
+                <section id="tab-informacoes" class="novo-roteiro__panel" role="tabpanel">
+                  <header>
+                    <h3>Informações</h3>
+                  </header>
+                  <div class="novo-roteiro__grid novo-roteiro__grid--two">
+                    <label class="novo-roteiro__field">
+                      <span>Informações gerais — bloco 1</span>
+                      <textarea id="info1" rows="4"></textarea>
+                    </label>
+                    <label class="novo-roteiro__field">
+                      <span>Informações gerais — bloco 2</span>
+                      <textarea id="info2" rows="4"></textarea>
+                    </label>
+                  </div>
+                </section>
+              </div>
+
+              <footer class="novo-roteiro__actions">
+                <button type="button" class="secondary" id="cancelarRoteiro">Cancelar</button>
+                <button type="button" class="primary" id="salvarRascunho">Salvar rascunho</button>
+                <button type="button" class="primary" id="aplicarRoteiro" disabled>Aplicar</button>
+              </footer>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboard" class="panel" aria-labelledby="tab-dashboard">
+        <header class="panel__header">
+          <h2 id="tab-dashboard">Visão Geral</h2>
+          <button class="primary" data-action="novo-agendamento">Novo agendamento</button>
+        </header>
+        <div class="panel__content" data-component="status-cards"></div>
+      </section>
+
+      <section id="agendamentos" class="panel" aria-labelledby="tab-agendamentos">
+        <header class="panel__header">
+          <h2 id="tab-agendamentos">Agendamentos</h2>
+          <div class="panel__actions">
+            <button class="secondary" data-action="sincronizar">Sincronizar</button>
+            <button class="primary" data-action="criar">Criar</button>
+          </div>
+        </header>
+        <div class="panel__content" data-component="schedule-table"></div>
+      </section>
+
+      <section id="relatorios" class="panel" aria-labelledby="tab-relatorios">
+        <header class="panel__header">
+          <h2 id="tab-relatorios">Relatórios</h2>
+          <button class="secondary" data-action="exportar">Exportar CSV</button>
+        </header>
+        <div class="panel__content" data-component="reports"></div>
+      </section>
+
+      <section id="configuracoes" class="panel" aria-labelledby="tab-configuracoes">
+        <header class="panel__header">
+          <h2 id="tab-configuracoes">Configurações</h2>
+        </header>
+        <div class="panel__content grid-2" data-component="settings"></div>
+      </section>
+    </main>
+
+    <template id="status-card-template">
+      <article class="status-card">
+        <h3 class="status-card__title"></h3>
+        <p class="status-card__value"></p>
+        <small class="status-card__delta"></small>
+      </article>
+    </template>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
